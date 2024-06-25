@@ -40,6 +40,8 @@ Example Playbook
       roles:
          - include_role: perdu.nagios
            vars:
+             nagios_source_version: '4.5.3'
+             nagios_plugin_source_version: '2.4.10'
              nagios_configs:
                - dest: objects/contacts-test.cfg
                  config:

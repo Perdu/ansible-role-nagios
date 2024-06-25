@@ -73,13 +73,13 @@ nagios_source_configure_args:
 # and it doesn't match the one referenced in the `nagios_source_tarball`
 # variable, this role will end up continually installing nagios since the
 # installed nagios version will never match the version listed here.
-nagios_source_version: 4.4.6
+nagios_source_version: 4.5.3
 
 # The download source for nagios core. See the note about `nagios_source_version`.
 nagios_source_tarball: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-{{ nagios_source_version }}.tar.gz
 
 # See the comment about the previous variable.
-nagios_plugin_source_version: 2.3.3
+nagios_plugin_source_version: 2.4.10
 
 # Since the default nagios core install will fail without the additional nagios
 # plugins, this role also installs the nagios plugins from this tarball.

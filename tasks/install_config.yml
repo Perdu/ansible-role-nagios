@@ -118,3 +118,9 @@
   lineinfile:
     path: '{{ __nagios_primary_config_file }}'
     line: 'cfg_file={{ __dest_path }}'
+
+- name: Add config file to nagios.cfg
+  lineinfile:
+    line: 'cfg_file={{ __dest_path }}'
+    path: '{{ __nagios_primary_config_file }}'
+    state: 'present'

@@ -150,7 +150,7 @@
     - "nagios_source_tarball is not none"
     - >-
       (not __nagios_bin.stat.exists) or
-      ((__nagios_version.stdout | regex_search('Nagios\s+Core\s+' + nagios_source_version) | length) == 0)
+      (__nagios_version.stdout | regex_search('Nagios\s+Core\s+' + nagios_source_version) is none)
 
 # After the installation, update the service files and daemon-reload
 # if needed

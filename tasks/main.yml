@@ -2,9 +2,9 @@
 # tasks file for ansible-role-nagios
 - name: Load platform variables
   ansible.builtin.include_vars:
-    file: "{{ lookup('first_found', vars_files, errors='ignore') }}"
+    file: "{{ lookup('first_found', platform_vars_files, errors='ignore') }}"
   vars:
-    vars_files:
+    platform_vars_files:
       files:
         - "{{ role_path }}/vars/{{ ansible_facts['distribution'] | lower }}/\
            {{ ansible_facts['distribution_major_version'] }}.yml"

@@ -14,3 +14,11 @@
   listen: restart nagios
   when:
     - "nagios_service_restart_state is not none"
+
+- name: Systemctl apache2 reload
+  service:
+    name: apache2
+    state: restarted
+  listen: systemctl apache2 reload
+  when:
+    - "ansible_service_mgr == 'systemd'"

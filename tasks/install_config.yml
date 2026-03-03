@@ -4,7 +4,11 @@
     __src_file: >-
       {%- if (nagios_config is mapping) and
              ('config' not in nagios_config) -%}
-        {{ nagios_config.src }}
+        {%- if 'src' in nagios_config -%}
+          {{ nagios_config.src }}
+        {%- elif 'template' in nagios_config -%}
+          {{ nagios_config.template }}
+        {%- endif -%}
       {%- elif (nagios_config is not mapping) -%}
         {{ nagios_config }}
       {%- endif -%}
@@ -88,6 +92,20 @@
   when:
     - "__src_file is defined"
     - "__src_file is not none"
+    - "'config' not in nagios_config"
+    - "'src' in nagios_config"
+
+- name: Render template to destination
+  template:
+    src: "{{ nagios_config.template }}"
+    dest: "{{ __dest_path }}"
+    owner: "{{ nagios_config.owner | default(nagios_user) }}"
+    group: "{{ nagios_config.group | default(nagios_group) }}"
+    mode: "{{ nagios_config.mode | default(nagios_default_config_file_mode) }}"
+  notify: restart nagios
+  when:
+    - nagios_config is mapping
+    - "'template' in nagios_config"
     - "'config' not in nagios_config"
 
 - name: Ensure that the destination directory for a 'config' exists

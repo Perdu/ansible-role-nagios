@@ -84,7 +84,7 @@
       notify: systemctl daemon-reload
       when:
         - "not nagios_source_install_service"
-        - "ansible_service_mgr == 'systemd'"
+        - "ansible_facts['service_mgr'] == 'systemd'"
 
     - name: Create the init.d file
       template:
@@ -95,7 +95,7 @@
         mode: "0755"
       when:
         - "not nagios_source_install_service"
-        - "ansible_service_mgr != 'systemd'"
+        - "ansible_facts['service_mgr'] != 'systemd'"
 
     - name: Install commandmode
       command: "make install-commandmode"
@@ -165,7 +165,7 @@
       notify: systemctl daemon-reload
       when:
         - "not nagios_source_install_service"
-        - "ansible_service_mgr == 'systemd'"
+        - "ansible_facts['service_mgr'] == 'systemd'"
 
     - name: Create the init.d file
       template:
@@ -176,7 +176,7 @@
         mode: "0755"
       when:
         - "not nagios_source_install_service"
-        - "ansible_service_mgr != 'systemd'"
+        - "ansible_facts['service_mgr'] != 'systemd'"
 
     - name: >-
         Flush handlers early so that we can control the service state later on

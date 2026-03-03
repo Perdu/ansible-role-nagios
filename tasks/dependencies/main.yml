@@ -10,7 +10,7 @@
     name: epel-release
     state: present
   when:
-    - "ansible_distribution == 'CentOS'"
+    - "ansible_facts['distribution'] == 'CentOS'"
     - "nagios_centos_install_epel"
 
 - name: Install nagios plugin dependencies

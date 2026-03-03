@@ -5,17 +5,17 @@
       {%- if nagios_packages is not none -%}
         {{ nagios_packages }}
       {%- elif (
-           (ansible_distribution|lower in _nagios_packages) and
-           (ansible_distribution_major_version|string in _nagios_packages[ansible_distribution|lower])
+           (ansible_facts['distribution']|lower in _nagios_packages) and
+           (ansible_facts['distribution_major_version']|string in _nagios_packages[ansible_facts['distribution']|lower])
          ) -%}
-         {{ _nagios_packages[ansible_distribution|lower][ansible_distribution_major_version|string] }}
+         {{ _nagios_packages[ansible_facts['distribution']|lower][ansible_facts['distribution_major_version']|string] }}
       {%- elif (
-           (ansible_distribution|lower in _nagios_packages) and
-           (ansible_distribution_major_version|int in _nagios_packages[ansible_distribution|lower])
+           (ansible_facts['distribution']|lower in _nagios_packages) and
+           (ansible_facts['distribution_major_version']|int in _nagios_packages[ansible_facts['distribution']|lower])
          ) -%}
-         {{ _nagios_packages[ansible_distribution|lower][ansible_distribution_major_version|int] }}
-      {%- elif (ansible_distribution|lower in _nagios_packages) -%}
-         {{ _nagios_packages[ansible_distribution|lower] }}
+         {{ _nagios_packages[ansible_facts['distribution']|lower][ansible_facts['distribution_major_version']|int] }}
+      {%- elif (ansible_facts['distribution']|lower in _nagios_packages) -%}
+         {{ _nagios_packages[ansible_facts['distribution']|lower] }}
       {%- else %}
         {{ none }}
       {%- endif -%}
@@ -24,17 +24,17 @@
       {%- if nagios_plugin_packages is not none -%}
         {{ nagios_plugin_packages }}
       {%- elif (
-           (ansible_distribution|lower in _nagios_plugin_packages) and
-           (ansible_distribution_major_version|string in _nagios_plugin_packages[ansible_distribution|lower])
+           (ansible_facts['distribution']|lower in _nagios_plugin_packages) and
+           (ansible_facts['distribution_major_version']|string in _nagios_plugin_packages[ansible_facts['distribution']|lower])
          ) -%}
-         {{ _nagios_plugin_packages[ansible_distribution|lower][ansible_distribution_major_version|string] }}
+         {{ _nagios_plugin_packages[ansible_facts['distribution']|lower][ansible_facts['distribution_major_version']|string] }}
       {%- elif (
-           (ansible_distribution|lower in _nagios_plugin_packages) and
-           (ansible_distribution_major_version|int in _nagios_plugin_packages[ansible_distribution|lower])
+           (ansible_facts['distribution']|lower in _nagios_plugin_packages) and
+           (ansible_facts['distribution_major_version']|int in _nagios_plugin_packages[ansible_facts['distribution']|lower])
          ) -%}
-         {{ _nagios_plugin_packages[ansible_distribution|lower][ansible_distribution_major_version|int] }}
-      {%- elif (ansible_distribution|lower in _nagios_plugin_packages) -%}
-         {{ _nagios_plugin_packages[ansible_distribution|lower] }}
+         {{ _nagios_plugin_packages[ansible_facts['distribution']|lower][ansible_facts['distribution_major_version']|int] }}
+      {%- elif (ansible_facts['distribution']|lower in _nagios_plugin_packages) -%}
+         {{ _nagios_plugin_packages[ansible_facts['distribution']|lower] }}
       {%- else %}
         {{ none }}
       {%- endif -%}

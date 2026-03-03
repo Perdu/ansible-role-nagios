@@ -16,7 +16,7 @@
     name: epel-release
     state: present
   when:
-    - "ansible_distribution == 'CentOS'"
+    - "ansible_facts['distribution'] == 'CentOS'"
     - "nagios_centos_install_epel"
 
 - name: Install plugin dependencies
@@ -25,8 +25,8 @@
     state: present
   when:
     - >-
-      ((not ansible_distribution == 'CentOS') and
-       (ansible_distribution_major_version|int == 8))
+      ((not ansible_facts['distribution'] == 'CentOS') and
+       (ansible_facts['distribution_major_version']|int == 8))
 
 - name: Install plugin dependencies (special case for CentOS 8)
   dnf:
@@ -34,8 +34,8 @@
     state: present
     enablerepo: "PowerTools,epel"
   when:
-    - "ansible_distribution == 'CentOS'"
-    - "ansible_distribution_major_version|int == 8"
+    - "ansible_facts['distribution'] == 'CentOS'"
+    - "ansible_facts['distribution_major_version']|int == 8"
 
 - block:
     - name: Create tmpdir

@@ -19,6 +19,9 @@ galaxy_info:
       versions:
         - stretch
         - buster
+        - bullseye
+        - bookworm
+        - trixie
 
   galaxy_tags:
     - nagios

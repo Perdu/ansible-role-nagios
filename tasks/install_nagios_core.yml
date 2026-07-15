@@ -129,16 +129,6 @@
             - cgi
           notify: systemctl apache2 reload
 
-        - name: Add a user to a password file and ensure permissions are set
-          community.general.htpasswd:
-            path: /usr/local/etc/nagios/htpasswd.users
-            name: '{{ nagios_web_user }}'
-            password: '{{ nagios_web_passwd }}'
-            owner: root
-            group: www-data
-            mode: 0640
-          when: nagios_web_passwd is not none
-
       when: nagios_install_webapp
 
   always:
@@ -151,6 +141,17 @@
     - >-
       (not __nagios_bin.stat.exists) or
       (__nagios_version.stdout | regex_search('Nagios\s+Core\s+' + nagios_source_version) is none)
+
+# Always run password task, to be able to update password
+- name: Add a user to a password file and ensure permissions are set
+  community.general.htpasswd:
+    path: /usr/local/etc/nagios/htpasswd.users
+    name: '{{ nagios_web_user }}'
+    password: '{{ nagios_web_passwd }}'
+    owner: root
+    group: www-data
+    mode: 0640
+  when: nagios_web_passwd is not none and nagios_install_webapp
 
 # After the installation, update the service files and daemon-reload
 # if needed
